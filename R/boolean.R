@@ -87,7 +87,7 @@ booltest <- function(calc, loglik, vars, coefs, ses, iter, hess, grad, zsc, pz, 
 
 
 
-boolean <- function(structure,method,maxoptions = "",optimizer="nlm",safety=1,bootstrap=FALSE,bootsize=100) {
+boolean <- function(structure,method,maxoptions = "",optimizer="nlm",safety=1,bootstrap=FALSE,bootsize=100,popsize=5000) {
 
 	#checking to ensure that input is of the right form
 
@@ -226,7 +226,7 @@ boolean <- function(structure,method,maxoptions = "",optimizer="nlm",safety=1,bo
 	# likelihood function is now saved as llik, defined as -1*llik
 
 
-	# minimization of -likelihood using either optim or nlm.  nlm maximization continues in a 'smart search'
+	# minimization of -likelihood using either optim, nlm, or genoud.  nlm maximization continues in a 'smart search'
 	# for iteration time defined in `safety'
 
 	tempfunc <- runif(length(vars))
@@ -256,6 +256,19 @@ boolean <- function(structure,method,maxoptions = "",optimizer="nlm",safety=1,bo
 	out$gradient <- matrix()
 	out$minimum <- out$value
 	out$iterations <- out$counts[1]
+	
+	}
+	
+	if (optimizer=="genoud") {
+
+	library("rgenoud")        
+	temp <- paste("genoud(llik, nvars=",length(tempfunc),", BFGS=TRUE, hessian=TRUE, pop.size=",popsize,")", sep="")
+	out <- eval(parse(text=temp))
+	out$estimate <- out$par
+	out$gradient <- out$gradients
+        out$gradient <- matrix()
+	out$minimum <- out$value
+	out$iterations <- out$generations
 	
 	}
 

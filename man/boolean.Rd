@@ -6,13 +6,12 @@
 \description{
   Boolean logit and probit are a family of partial-observability
   \emph{n}-variate models designed to permit researchers to model
-  causal complexity, or multiple causal "paths" to a given outcome
-  (e.g., a situation in which either a or b will produce y, one in
-  which (a or b) and c produce y, and so forth).
+  causal complexity, or multiple causal "paths" to a given
+  outcome.
 }
 \usage{
 boolean(structure, method, maxoptions = "", optimizer="nlm",
-        safety=1, bootstrap=FALSE, bootsize=100)
+        safety=1, bootstrap=FALSE, bootsize=100, popsize=5000)
 }
 \arguments{
   \item{structure}{ 
@@ -27,38 +26,37 @@ boolean(structure, method, maxoptions = "", optimizer="nlm",
   \item{method}{ Either "logit" or "probit". }
   \item{maxoptions}{ Maximization options (see \code{\link{nlm}} or
   \code{\link{optim}} for details). }
-  \item{optimizer}{ Either "nlm" or "optim". }
+  \item{optimizer}{ Either "nlm", "optim", or "genoud". }
   \item{safety}{ Number of search attempts.  The likelihood functions
   implied by Boolean procedures can become quite convoluted; in such
   cases, multiple searches from different starting points can be run.
   Works only when using \code{nlm}. }
   \item{bootstrap}{ If TRUE, bootstraps standard errors. }
   \item{bootsize}{ Number of iterations if bootstrap=TRUE. }
+  \item{popsize}{ Population size if optimizer=genoud. }
 }
 \details{
-  Boolean permits estimation of Boolean logit and probit equations
-  (see Braumoeller 2003 for derivation).  Boolean logit and probit
-  model situations in which any number of antecedent conditions
-  (a, b, c, ...) occur with probabilities that can be modeled using
-  standard logit or probit curves, and the antecedent conditions
-  combine in a manner described by Boolean logic to produce the
-  dependent variable.  This phenomenon has been referred to by various
-  names, including interaction effects, causal complexity, multiple
-  "causal paths," conjunctural causation, and substitutability.  To
-  take a straightforward example, a theory might suggest that only the
-  conjunction of two events produces some phenomenon of interest --
-  i.e., for a binary dependent variable y, Pr(y=1|a,b) = Pr(a) x Pr(b);
-  that the probability of a's occurrence is influenced by variables
-  x1...x4; and that the probability of b's occurrence is influenced by
-  variables x2 and x5...x8.  If, instead, the probability that the
-  phenomenon of interest will occur is equal to the probability that
-  one or the other of the antecedent events will occur ("or" rather
-  than "and"), Pr(y=1|a,b) = 1 - ([1-Pr(a)] x [1-Pr(b)]).  In principle
-  any combination of "and"s and "or"s can be modeled -- (A and B) or C
-  produces Y, (A and B and C) or (D and E) produce Y, etc., etc., with
-  each antecedent condition being influenced by some vector of
-  independent variables.  Boolean logit and probit are designed for
-  use in such situations.
+  Boolean permits estimation of Boolean logit and probit models
+ (see Braumoeller 2003 for derivation).  Boolean logit and probit are a
+ family of partial-observability n-variate models designed to permit
+ researchers to model causal complexity, or multiple causal "paths" to a
+ given outcome.  The various "paths" are modeled as latent dependent
+ variables that are multiplied together in a manner determined by the
+ logic of their (Boolean) interaction.  If, for example, we wanted to
+ model a situation in which diet OR smoking causes heart failure, we
+ would use one set of independent variables (caloric intake, fat intake,
+ etc.) to predict the latent probability of diet-related coronary
+ failure (y1*), use another set of variables (cigarettes smoked per day,
+ exposure to second-hand smoke, etc.) to predict the latent probability
+ of smoking-related coronary failure (y2*), and model the observed
+ outcome (y, or coronary failure) as a function of the Boolean
+ interaction of the two: Pr(y=1) = 1-([1-y1*] x [1-y2*]).  Independent
+ variables that have an impact on both latent dependent variables can
+ be included in both paths.  Any combination of ANDs and ORs can be
+ posited, and the interaction of any number of latent dependent
+ variables can be modeled, although the procedure becomes exponentially
+ more data-intensive as the number of latent dependent variables
+ increases.
 }
 \value{
   Returns an object of class booltest, with slots @Calculus, @LogLik,
@@ -67,7 +65,8 @@ boolean(structure, method, maxoptions = "", optimizer="nlm",
   @method (note that some slots may be left empty if the relevant
   information is not furnished by the maximizer).
 }
-\references{  Braumoeller, Bear F. (2003) "Causal Complexity and the Study
+\references{
+  Braumoeller, Bear F. (2003) "Causal Complexity and the Study
   of Politics." \emph{Political Analysis} 11(3): 209-233.
 }
 \author{
@@ -93,10 +92,7 @@ x3<-rnorm(1000)
 x4<-rnorm(1000)
 x5<-rnorm(1000)
 x6<-rnorm(1000)
-e1<-rnorm(1000)/3
-e2<-rnorm(1000)/3
-e3<-rnorm(1000)/3
-y<-1-(1-pnorm(-2+0.33*x1+0.66*x2+1*x3+e1)*1-(pnorm(1+1.5*x4-0.25*x5+e2)*pnorm(1+0.2*x6+e3)))
+y<-1-(1-pnorm(-2+0.33*x1+0.66*x2+1*x3)*1-(pnorm(1+1.5*x4-0.25*x5)*pnorm(1+0.2*x6)))
 y <- y>runif(1000)
 answer <- boolean(y ~( ((cons+x1+x2+x3)|((cons+x4+x5)&(cons+x6))) ), method="probit")
 
