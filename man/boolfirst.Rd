@@ -1,6 +1,6 @@
 \name{boolfirst}
 \alias{boolfirst}
-\title{ Graph first differences after Boolean logit/probit }
+\title{ Graph First Differences after Boolean Logit/Probit }
 \description{
   This function graphs first differences for a given variable,
   with all other variables held at their means, following the

@@ -1,7 +1,7 @@
 \name{boolprof}
 \alias{boolprof}
 
-\title{Graph profile likelihoods for Boolean logit/probit}
+\title{Graph Profile Likelihoods for Boolean Logit/Probit}
 \description{
   This command produces a graph of the profile likelihood for a
   given coefficient following the estimation of a Boolean logit

@@ -1,7 +1,13 @@
-boolean                 Boolean logit and probit
-boolfirst               Graph first differences after Boolean
-                        logit/probit
-boolprep                Generate functional form for Boolean logit or
-                        probit
-boolprof                Graph profile likelihoods for Boolean
-                        logit/probit
+boolean                 Partial-Observability Logit or Probit Models for
+                        Testing Boolean Hypotheses
+boolfirst               Graph First Differences after Boolean
+                        Logit/Probit
+boolprep                Generate Functional Form for Boolean Logit or
+                        Probit
+boolprof                Graph Profile Likelihoods for Boolean
+                        Logit/Probit
+booltest                Boolean Logit/Probit Objects
+coef.boolean            Display Coefficients after Boolean Logit/Probit
+plot.boolean            Generate a Plot Matrix after Boolean Logit/Probit
+show.boolean            Display Booltest Object after Boolean Logit/Probit
+summary.boolean         Display Estimated Model after Boolean Logit/Probit

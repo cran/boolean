@@ -1,6 +1,6 @@
 \name{boolprep}
 \alias{boolprep}
-\title{ Generate functional form for Boolean logit or probit }
+\title{ Generate Functional Form for Boolean Logit or Probit }
 \description{
   Takes as arguments the logical form of a Boolean model, the
   dependent variable, and the vectors of independent variables, and

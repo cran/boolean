@@ -1,7 +1,8 @@
 \name{boolean}
 \alias{boolean}
 \alias{Boolean}
-\title{ Boolean logit and probit }
+\title{ Partial-Observability Logit or Probit Models for Testing 
+  Boolean Hypotheses }
 \description{
   Boolean logit and probit are a family of partial-observability
   \emph{n}-variate models designed to permit researchers to model

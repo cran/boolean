@@ -1,7 +1,7 @@
 \name{booltest}
 \alias{booltest}
 \alias{booltest-class}
-\title{ Boolean logit/probit objects }
+\title{ Boolean Logit/Probit Objects }
 \description{
   Boolean logit and probit procedures produce an object of class
   booltest.  Such an object contains slots @Calculus, @LogLik,

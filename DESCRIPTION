@@ -1,6 +1,6 @@
 Package: boolean
-Version: 1.02
-Date: 2003-07-15
+Version: 1.03
+Date: 2003-10-09
 Title: Boolean logit and probit
 Author: Bear F. Braumoeller <bfbraum@fas.harvard.edu>, Jacob Kline <jkline@fas.harvard.edu>
 Maintainer: Bear F. Braumoeller <bfbraum@fas.harvard.edu>
