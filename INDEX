@@ -1,0 +1,7 @@
+boolean                 Boolean logit and probit
+boolfirst               Graph first differences after Boolean
+                        logit/probit
+boolprep                Generate functional form for Boolean logit or
+                        probit
+boolprof                Graph profile likelihoods for Boolean
+                        logit/probit
