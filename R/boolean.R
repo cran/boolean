@@ -220,7 +220,7 @@ boolean <- function(structure,method,maxoptions = "",optimizer="nlm",safety=1,bo
 	eval(parse(text=paste(depvar,"<- as.integer(",depvar,")",sep="")))
 
 
-	q<-paste("llik <- function(b) {ifelse((max(abs(b))<10),sum(-1*(1-(",depvar,"))*mlog(1-",structure,")-",depvar,"*mlog(",structure,"),na.rm=TRUE),10000000)}",sep="")
+	q<-paste("llik <- function(b) {sum(-1*(1-(",depvar,"))*mlog(1-",structure,")-",depvar,"*mlog(",structure,"),na.rm=TRUE)}",sep="")
 	eval(parse(text=q,n=-1))
 
 	# likelihood function is now saved as llik, defined as -1*llik
