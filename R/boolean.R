@@ -1,4 +1,5 @@
-require("methods")  
+require("methods")
+require("stats")
 
 setClass("booltest",representation(Calculus="character", LogLik="numeric",Variables="vector",Coefficients="vector", StandardErrors="vector", Iterations="numeric", Hessian = "matrix", Gradient = "vector", Zscore = "vector", Probz = "vector", Conf95lo = "vector", Conf95hi = "vector", pstructure = "character",method="character")) 
 

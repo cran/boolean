@@ -42,15 +42,22 @@ boolean(structure, method, maxoptions = "", optimizer="nlm",
   (a, b, c, ...) occur with probabilities that can be modeled using
   standard logit or probit curves, and the antecedent conditions
   combine in a manner described by Boolean logic to produce the
-  dependent variable.  For example, theory might suggest that a binary
-  dependent variable y occurs only when conditions a and b are present,
+  dependent variable.  This phenomenon has been referred to by various
+  names, including interaction effects, causal complexity, multiple
+  "causal paths," conjunctural causation, and substitutability.  To
+  take a straightforward example, a theory might suggest that only the
+  conjunction of two events produces some phenomenon of interest --
+  i.e., for a binary dependent variable y, Pr(y=1|a,b) = Pr(a) x Pr(b);
   that the probability of a's occurrence is influenced by variables
-  x1...x4, and that the probability of b's occurrence is influenced by
-  variables x5...x8.  Alternately, theory might suggest that y occurs
-  if (a and b) or (c and d) are present (in other words, that a-d are
-  INUS conditions; see Mackie 1965), and that the probability of the
-  occurrence of each antecedent condition is influenced by some vector
-  of independent variables.  Boolean logit and probit are designed for
+  x1...x4; and that the probability of b's occurrence is influenced by
+  variables x2 and x5...x8.  If, instead, the probability that the
+  phenomenon of interest will occur is equal to the probability that
+  one or the other of the antecedent events will occur ("or" rather
+  than "and"), Pr(y=1|a,b) = 1 - ([1-Pr(a)] x [1-Pr(b)]).  In principle
+  any combination of "and"s and "or"s can be modeled -- (A and B) or C
+  produces Y, (A and B and C) or (D and E) produce Y, etc., etc., with
+  each antecedent condition being influenced by some vector of
+  independent variables.  Boolean logit and probit are designed for
   use in such situations.
 }
 \value{
@@ -62,9 +69,7 @@ boolean(structure, method, maxoptions = "", optimizer="nlm",
 }
 \references{  Braumoeller, Bear F. (2003) "Causal Complexity and the Study
   of Politics." \emph{Political Analysis} 11(3): 209-233.
-
-  Mackie, J. L. (1965) "Causes and Conditions." \emph{American
-  Philosophical Quarterly} 2(4): 245-264.}
+}
 \author{
 Bear F. Braumoeller, Harvard University, \email{bfbraum@fas.harvard.edu} \cr
 Jacob Kline, Harvard University, \email{jkline@fas.harvard.edu}
