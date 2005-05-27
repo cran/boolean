@@ -307,7 +307,7 @@ boolean <- function(structure,method,maxoptions = "",optimizer="nlm",safety=1,bo
 			sampindices <- sample(indices, size, replace = TRUE, prob = NULL)
 			weights <- integer()
 			for (j in 1:size) {weights[j] <- sum(sampindices == j)}
-			q<-paste("llik <- function(b) {ifelse((max(abs(b))<10),weighted.mean(-1*(1-(",depvar,"))*mlog(1-",structure,")-",depvar,"*mlog(",structure,"), weights, na.rm=FALSE),1000)}",sep="")	
+			q<-paste("llik <- function(b) {weighted.mean(-1*(1-(",depvar,"))*mlog(1-",structure,")-",depvar,"*mlog(",structure,"), weights, na.rm=FALSE)}",sep="")	
 			eval(parse(text=q,n=-1))
 			temp <- paste("nlm(llik,tempfunc,hessian = FALSE, iterlim = 100",maxop,")")
 			tempout <- eval(parse(text=temp))
