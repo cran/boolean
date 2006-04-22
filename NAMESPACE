@@ -1,0 +1,17 @@
+export( boolean,
+        boolfirst,
+        boolprep,
+        boolprof,
+        coef.booltest,
+        fitted.booltest,
+        fitted.values.booltest,
+        print.summary.booltest,
+        summary.booltest
+)
+	
+S3method(coef, booltest)
+S3method(summary, booltest)
+S3method(fitted, booltest)
+S3method(fitted.values, booltest)
+S3method(print, summary.booltest)
+S3method(weights, booltest)
