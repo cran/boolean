@@ -7,10 +7,10 @@
   \code{sim} function in the Zelig library.
 }
 \usage{
-  boolfirst()
+  boolfirst(...)
 }
 \arguments{
-  None.
+  \item{...}{It does not matter.}
 }
 \value{
   A message indicating deprecation is printed; nothing is returned.

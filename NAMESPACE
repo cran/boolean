@@ -1,13 +1,9 @@
 export( boolean,
         boolfirst,
         boolprep,
-        boolprof,
-        coef.booltest,
-        fitted.booltest,
-        fitted.values.booltest,
-        print.summary.booltest,
-        summary.booltest
+        boolprof
 )
+importFrom("stats", "coef", "fitted", "fitted.values", "weights")
 	
 S3method(coef, booltest)
 S3method(summary, booltest)
