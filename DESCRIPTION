@@ -1,6 +1,6 @@
 Package: boolean
-Version: 1.1-1
-Date: 2006-10-07
+Version: 1.1-2
+Date: 2006-11-29
 Title: Boolean Binary Response Models
 Author: Bear F. Braumoeller <bfbraum@fas.harvard.edu>, Ben Goodrich <goodrich@fas.harvard.edu>, Jacob Kline <jkline@fas.harvard.edu>
 Maintainer: Bear F. Braumoeller <bfbraum@fas.harvard.edu>

@@ -555,7 +555,11 @@ boolprof <- function(object, gvar = NULL, range = NULL, M = 100) {
   MAP <- admin[[3]]
 
   if(is.null(object$boolean.call$link)) link <- formals(boolean)$link
-  else link <- as.character(object$boolean.call$link)[-1]
+#  else link <- as.character(object$boolean.call$link)[-1]
+  else {
+    link <- as.character(object$boolean.call$link)
+    link <- link[link != "c"]
+  }
   if(length(link) == 1) link <- rep(as.character(link), nrow(admin[[3]]))
 
   npars <- ncol(X) + sum(pmatch(substr(link, 1, 6), "scobit", nomatch = FALSE, duplicates.ok = TRUE))
