@@ -1,0 +1,22 @@
+export( boolean,
+        boolfirst,
+        boolprep,
+        boolprof,
+        latent,
+        boolplot,
+	effectplot
+)
+importFrom("stats", "coef", "fitted", "fitted.values", "weights")
+importFrom("Zelig", "zelig", "setx", "sim")
+	
+S3method(coef, booltest)
+S3method(summary, booltest)
+S3method(fitted, booltest)
+S3method(fitted.values, booltest)
+S3method(print, summary.booltest)
+S3method(weights, booltest)
+S3method(zelig, boolprep)
+S3method(setx, booltest)
+S3method(sim, booltest)
+
+
