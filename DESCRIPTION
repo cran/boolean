@@ -1,6 +1,6 @@
 Package: boolean
-Version: 2.0-0
-Date: 2009-08-26
+Version: 2.0-1
+Date: 2009-09-04
 Title: Boolean Binary Response Models
 Author: Bear F. Braumoeller <braumoeller.1@polisci.osu.edu>, Ben
         Goodrich <goodrich@fas.harvard.edu>, Jacob Kline
@@ -13,6 +13,6 @@ Description: This package implements a partial-observability procedure
         for testing Boolean hypotheses that generalizes the binary
         response GLM.
 License: GPL (>= 2)
-Packaged: 2009-08-30 20:01:03 UTC; goodrich
+Packaged: 2009-09-04 14:36:11 UTC; goodrich
 Repository: CRAN
-Date/Publication: 2009-08-31 18:05:38
+Date/Publication: 2009-09-04 17:01:59

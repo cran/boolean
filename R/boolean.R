@@ -521,7 +521,10 @@ function(object, probability = FALSE, invMills = FALSE) {
   par <- object$coefficients
   scobitMark <- ncol(X) + 1
   holder <- array(NA, dim = c(nrow(X), switch(is.matrix(par) + 1, nrow(map), c(nrow(map), nrow(par)))))
-  colnames(holder) <- names(object$boolean.call$formula)[-1]
+  cnames <- names(object$boolean.call$formula)
+  mark <- !(cnames %in% c("structure", "depvar"))
+  cnames <- cnames[mark]
+  colnames(holder) <- cnames
   for(i in 1:nrow(map)) {
     SEQ <- map[i,1]:map[i,2]
     invlink <- make.invlink(link[i])
