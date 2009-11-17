@@ -47,7 +47,7 @@ boolprep(FORM, DEPVAR, ...)
 }
 
 \author{
-Bear F. Braumoeller, Harvard University, \email{bfbraum@fas.harvard.edu}\cr
+Bear F. Braumoeller, Harvard University, \email{braumoeller.1@polisci.osu.edu}\cr
 Ben Goodrich, Harvard University, \email{goodrich@fas.harvard.edu}, and\cr
 Jacob Kline, Harvard University, \email{jkline@fas.harvard.edu}
 }

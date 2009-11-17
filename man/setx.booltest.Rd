@@ -27,7 +27,7 @@ in the Zelig library. It should not be called directly by the user.
   see \code{\link[Zelig]{setx}} for details.
 }
 \author{
-Bear F. Braumoeller, Harvard University, \email{bfbraum@fas.harvard.edu}, and\cr
+Bear F. Braumoeller, Harvard University, \email{braumoeller.1@polisci.osu.edu}, and\cr
 Ben Goodrich, Harvard University, \email{goodrich@fas.harvard.edu}
 }
 \keyword{methods}

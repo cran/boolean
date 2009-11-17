@@ -19,7 +19,8 @@ boolplot(z.out, variable, delta = 0, suppression.factor = FALSE, CI = 95,
                be non-zero.}
   \item{suppression.factor}{If true, then the complement of the probability of the 
                             outcome constitutes the y-axis.}
-  \item{CI}{Confidence interval for (the change in) the probability of the outcome.}
+  \item{CI}{Confidence interval for (the change in) the probability of the outcome. Set
+    this equal to any negative number to suppress confidence intervals.}
   \item{truehist}{If TRUE, a histogram for \code{variable} is included in the plot.}
   \item{legend}{If TRUE, a legend is included in the plot.}
   \item{plot.both}{If TRUE, the probability of the outcome is plotted as a function
@@ -38,7 +39,7 @@ boolplot(z.out, variable, delta = 0, suppression.factor = FALSE, CI = 95,
   of Politics." \emph{Political Analysis} 11(3): 209-233.
 }
 \author{
-Bear F. Braumoeller, Harvard University, \email{bfbraum@fas.harvard.edu},\cr
+Bear F. Braumoeller, Harvard University, \email{braumoeller.1@polisci.osu.edu},\cr
 Ben Goodrich, Harvard University, \email{goodrich@fas.harvard.edu}, and\cr
 Jacob Kline, Harvard University, \email{jkline@fas.harvard.edu}
 }

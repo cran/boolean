@@ -29,7 +29,8 @@ function(FORM, DEPVAR, ...) {
     stop("Please respecify and call boolprep() again.\n", call. = FALSE)
   }
   form <- FORM
-  form <- gsub(" ", "", form, extended = FALSE)
+#   form <- gsub(" ", "", form, extended = FALSE)
+  form <- gsub(" ", "", form)
   form.split <- strsplit(form, split = NULL)[[1]]
   if(sum(form.split == "(") != sum(form.split == ")")) {
     cat(paste("Number of left parentheses does not match the number of right parentheses in ", FORM, "\n", sep = ""))
@@ -47,10 +48,14 @@ function(FORM, DEPVAR, ...) {
     else if(form.split[i] == ")" | form.split[i] == "(") check <- c("&", "|")
   }
   form.split <- form
-  form.split <- gsub("(", "#", form.split, extended = FALSE)
-  form.split <- gsub(")", "#", form.split, extended = FALSE)
-  form.split <- gsub("&", "#", form.split, extended = FALSE)
-  form.split <- gsub("|", "#", form.split, extended = FALSE)
+#   form.split <- gsub("(", "#", form.split, extended = FALSE)
+#   form.split <- gsub(")", "#", form.split, extended = FALSE)
+#   form.split <- gsub("&", "#", form.split, extended = FALSE)
+#   form.split <- gsub("|", "#", form.split, extended = FALSE)
+  form.split <- gsub("[(]", "#", form.split)
+  form.split <- gsub("[)]", "#", form.split)
+  form.split <- gsub("[&]", "#", form.split)
+  form.split <- gsub("[|]", "#", form.split)
   form.split <- strsplit(form.split, split = "#")[[1]]
   form.split <- form.split[form.split != ""]
   dots <- match.call(expand.dots = TRUE)[-(1:3)]
@@ -646,7 +651,7 @@ function(object, gvar = NULL, range = NULL, M = 100) {
     devices <- ceiling(ncol(simpar)/9)
     i <- 1
     while(i <  devices) {
-      get(getOption("device"))()
+      dev.new()
       i <- i + 1
     }
     par(mfrow = c(3,3))
@@ -660,7 +665,7 @@ function(object, gvar = NULL, range = NULL, M = 100) {
       simpar.temp[,i] <- sort(simpar[,i])
       ll <- llik(par = simpar.temp)
       if(i <= ncol(X)) {
-        plot(x = simpar.temp[,i], y = ll, type = "l", sub = colnames(simpar)[i],
+        plot(x = simpar.temp[,i], y = ll, type = "l", sub = colnames(X)[i],
              xlab = expression(hat(beta)), ylab = "Log-likelihood")
       }
       else {
@@ -715,6 +720,7 @@ function(z.out, variable, delta = 0, suppression.factor = FALSE, CI = 95,
   x.out.base <- setx(z.out)
 
   if(nrow(x.out.base) > 1) stopifnot(nrow(x.out.base) == nrow(x.out))
+  if(missing(variable)) stop("'variable' must be specified")
   x.out[,substr(colnames(x.out), start = 1, stop = nchar(variable)) != variable] <-
   x.out.base[,substr(colnames(x.out), start = 1, stop = nchar(variable)) != variable]
 
@@ -724,7 +730,7 @@ function(z.out, variable, delta = 0, suppression.factor = FALSE, CI = 95,
   xvar <- x.out[,as.logical(pmatch(substr(colnames(x.out), start = 1,
                  stop = nchar(variable)), table = variable, nomatch = FALSE))]
   x.out <- x.out[order(xvar),]
-  xvar <- sort(xvar)
+  XVAR <- xvar <- sort(xvar)
   xvar.unique <- !duplicated(xvar)
   xvar <- xvar[xvar.unique]
   x.out <- x.out[xvar.unique,]
@@ -742,16 +748,17 @@ function(z.out, variable, delta = 0, suppression.factor = FALSE, CI = 95,
     if(truehist) {
       stopifnot(require(MASS))
       par(new = TRUE)
-      truehist(xvar, col = "white", border = "gray", xlab = "", ylab = "", ylim = yscale,  axes = FALSE)
+      truehist(XVAR, col = "white", border = "gray", xlab = "", ylab = "",
+	       xlim = range(xvar), ylim = yscale,  axes = FALSE)
     }
-    if(!polygon) {
+    if(!polygon & CI >= 0) {
       lines(x = xvar, y = apply(s.out$qi$ev, 1, quantile, probs = (1 - CI) / 2), lty = "dashed")
       lines(x = xvar, y = apply(s.out$qi$ev, 1, quantile, probs = CI + (1 - CI) / 2), lty = "dashed")
     }
     else polygon(c(xvar, sort(xvar, decreasing = TRUE)), y = c(apply(s.out$qi$ev, 1, quantile, probs = CI + (1 - CI) / 2), rev(apply(s.out$qi$ev, 1, quantile, probs = (1 - CI) / 2))), col = "gray80", border = NA)
     lines(x = xvar, y = rowMeans(s.out$qi$ev), col = "red", pch = 20, type = if(truehist) "l" else "b")
     if(plot.both) {
-      if(!polygon) {
+      if(!polygon & CI >= 0) {
         lines(x = xvar, y = apply(s.out$qi$fd, 1, quantile, probs = (1 - CI) / 2), lty = "dashed")
         lines(x = xvar, y = apply(s.out$qi$fd, 1, quantile, probs = CI + (1 - CI) / 2), lty = "dashed")
       }
@@ -774,7 +781,8 @@ function(z.out, variable, delta = 0, suppression.factor = FALSE, CI = 95,
     if(truehist) {
       stopifnot(require(MASS))
       par(new = TRUE)
-      truehist(xvar, col = "white", border = "gray", xlab = "", ylab = "", ylim = 0:1, axes = FALSE)
+      truehist(XVAR, col = "white", border = "gray", xlab = "", ylab = "",
+	       xlim = range(xvar), ylim = 0:1, axes = FALSE)
     }
     if(isTRUE(suppression.factor)) s.out$qi$fd <- 1 - s.out$qi$fd
     lines(x = xvar, y = apply(s.out$qi$fd, 1, quantile, probs = (1 - CI) / 2), lty = "dashed")
@@ -809,7 +817,7 @@ function(z.out, variables, delta = 1, CI = 95, truehist = TRUE,
   xvar <- x.out[,as.logical(pmatch(substr(colnames(x.out), start = 1,
                  stop = nchar(variables[1])), table = variables[1], nomatch = FALSE))]
   x.out <- x.out[order(xvar),]
-  xvar <- sort(xvar)
+  XVAR <- xvar <- sort(xvar)
 
   # Why was there no xvar.unique before?
   xvar.unique <- !duplicated(xvar)
@@ -827,9 +835,10 @@ function(z.out, variables, delta = 1, CI = 95, truehist = TRUE,
   if(truehist) {
       stopifnot(require(MASS))
       par(new = TRUE)
-      truehist(xvar, col = "white", border = "gray", xlab = "", ylab = "", ylim = c(min(0, min(yvar)), 1), axes = FALSE)
+      truehist(XVAR, col = "white", border = "gray", xlab = "", ylab = "",
+	       xlim = range(xvar), ylim = c(min(0, min(yvar)), 1), axes = FALSE)
   }
-  if(!polygon) {
+  if(!polygon & CI >= 0) {
       lines(x = xvar, y = apply(s.out$qi$fd, 1, quantile, probs = (1 - CI) / 2), lty = "dashed")
       lines(x = xvar, y = apply(s.out$qi$fd, 1, quantile, probs = CI + (1 - CI) / 2), lty = "dashed")
   }

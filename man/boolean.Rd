@@ -121,7 +121,7 @@ boolean(formula, data, link = "logit", start.values = NULL,
   and Probit." \emph{American Journal of Political Science} 38(1): 230-255.
 }
 \author{
-Bear F. Braumoeller, Harvard University, \email{bfbraum@fas.harvard.edu},\cr
+Bear F. Braumoeller, Harvard University, \email{braumoeller.1@polisci.osu.edu},\cr
 Ben Goodrich, Harvard University, \email{goodrich@fas.harvard.edu}, and\cr
 Jacob Kline, Harvard University, \email{jkline@fas.harvard.edu}
 }

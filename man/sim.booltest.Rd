@@ -32,7 +32,7 @@ in the Zelig library. They should not be called directly by the user.
   same as for a probit or logit model estimated via \code{zelig}.
 }
 \author{
-Bear F. Braumoeller, Harvard University, \email{bfbraum@fas.harvard.edu}, and\cr
+Bear F. Braumoeller, Harvard University, \email{braumoeller.1@polisci.osu.edu}, and\cr
 Ben Goodrich, Harvard University, \email{goodrich@fas.harvard.edu}
 }
 \keyword{methods}

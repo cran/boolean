@@ -17,7 +17,8 @@ effectplot(z.out, variables, delta = 1, CI = 95, truehist = TRUE,
                    perturbed by \code{delta}}
   \item{delta}{The amount by which to perturb the sample values of the second element 
                of \code{variable}.}
-  \item{CI}{Confidence interval for (the change in) the probability of the outcome.}
+  \item{CI}{Confidence interval for (the change in) the probability of the outcome. Set
+     this equal to any negative number to suppress confidence intervals.}
   \item{truehist}{If TRUE, a histogram for \code{variable} is included in the plot.}
   \item{legend}{If TRUE, a legend is included in the plot.}
   \item{polygon}{If TRUE, then the confidence intervals as filled as ploygons.}
@@ -31,7 +32,7 @@ effectplot(z.out, variables, delta = 1, CI = 95, truehist = TRUE,
   of Politics." \emph{Political Analysis} 11(3): 209-233.
 }
 \author{
-Bear F. Braumoeller, Harvard University, \email{bfbraum@fas.harvard.edu},\cr
+Bear F. Braumoeller, Harvard University, \email{braumoeller.1@polisci.osu.edu},\cr
 Ben Goodrich, Harvard University, \email{goodrich@fas.harvard.edu}, and\cr
 Jacob Kline, Harvard University, \email{jkline@fas.harvard.edu}
 }
